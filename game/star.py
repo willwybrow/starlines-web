@@ -14,10 +14,8 @@ class StarID(UUID):
     def generate():
         return StarID(str(uuid.uuid4()))
 
-@dataclass
-class ClusterID:
-    universe_id: UUID
-    coordinate: Point
+class ClusterID(Point):
+    pass
 
 @dataclass
 class Star(GameObject):

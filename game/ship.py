@@ -9,10 +9,8 @@ from game.star import Star
 class Ship(GameObject):
     id: UUID
     model = None
-    orbit_source: Star
 
 
 @dataclass
 class Probe(Ship):
     model = "probe"
-    orbit_destination: Star = None

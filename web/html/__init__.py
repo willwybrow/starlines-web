@@ -4,6 +4,7 @@ from flask import render_template, g, url_for, request, make_response, Blueprint
 from werkzeug.utils import redirect
 
 from game.geometry import Point
+from game.star import ClusterID
 from game.universe import CLUSTER_SIZE
 from gameservice.gameservice import GameService
 from web.db import get_db
@@ -24,13 +25,12 @@ def index():
     if 'player_id' not in request.cookies:
         return render_template('login.html')
     universe = g.game_service.universe_service.new_universe()
-    return redirect(url_for('.view_universe_page', universe_id=str(universe.id)))
+    return redirect(url_for('.view_universe_page'))
 
 
-@bp.route("/universe/<universe_id>")
-def view_universe_page(universe_id=None):
-    uid = uuid.UUID(universe_id)
-    return render_template('universe.html', universe_id=uid)
+@bp.route("/universe")
+def view_universe_page():
+    return render_template('universe.html')
 
 
 @bp.route("/login", methods=['POST'])
@@ -41,17 +41,16 @@ def login():
     resp.set_cookie('player_id', str(player.id))
     return resp
 
-@bp.route("/universe/<universe_id>/cluster/<int(signed=True):x>/<int(signed=True):y>")
-def view_cluster_page(universe_id=None, x=None, y=None):
-    uid = uuid.UUID(universe_id)
-    cp = Point(x, y)
-    stars = g.game_service.get_cluster_stars(uid, cp)
+@bp.route("/universe/cluster/<int(signed=True):x>/<int(signed=True):y>")
+def view_cluster_page(x=None, y=None):
+    cp = ClusterID(x, y)
+    stars = g.game_service.get_cluster_stars(cp)
     star_grid = []
     for xi in range(0, CLUSTER_SIZE):
         star_grid.append([])
         for yi in range(0, CLUSTER_SIZE):
             star_grid[xi].append(stars.get(Point(xi, yi)))
-    return render_template('cluster.html', universe_id=universe_id, cluster_coordinate=cp, list_of_list_of_stars=star_grid)
+    return render_template('cluster.html', cluster_coordinate=cp, list_of_list_of_stars=star_grid)
 
 
 @bp.route("/star/<star_id>")

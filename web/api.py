@@ -1,13 +1,12 @@
 import json
 from uuid import UUID
 
-import persistence.sqlite
-from game.geometry import Point
-from game.star import Star
-from game.universe import CLUSTER_SIZE
-from gameservice.gameservice import GameService
 from flask import g, request, Blueprint
 
+from game.geometry import Point
+from game.star import Star, ClusterID
+from game.universe import CLUSTER_SIZE
+from gameservice.gameservice import GameService
 from web.db import get_db
 
 bp = Blueprint("api", __name__, url_prefix="/api")
@@ -20,10 +19,10 @@ def initialise_services():
     except:
         pass
 
-@bp.route('/universe/<universe_id>/cluster/<x>/<y>')
-def view_cluster(universe_id=None, x=0, y=0):
-    coordinate = Point(x, y)
-    stars = g.game_service.get_cluster_stars(g.universe_id, coordinate)
+@bp.route('/universe/cluster/<x>/<y>')
+def view_cluster(x=0, y=0):
+    coordinate = ClusterID(x, y)
+    stars = g.game_service.get_cluster_stars(coordinate)
     star_grid = []
     for xi in range(0, CLUSTER_SIZE):
         star_grid.append([])
