@@ -1,0 +1,30 @@
+
+{% extends "base.html" %}
+{% block title %}Cluster{% endblock %}
+
+{% from "star_grid.html" import star_grid with context %}
+
+{% block content %}
+<h1>Star lines</h1>
+<div class="ui">
+    <div class="ui-row">
+        <div class="travel-up">
+            <a class="navigation-button" href="{{ url_for('.view_cluster_page', universe_id=universe_id, x=cluster_coordinate.x, y=cluster_coordinate.y+1) }} ">&#x2B9D;</a>
+        </div>
+    </div>
+    <div class="ui-row">
+    <div class="travel-left ui">
+        <a class="navigation-button"  href="{{ url_for('.view_cluster_page', universe_id=universe_id, x=cluster_coordinate.x-1, y=cluster_coordinate.y) }} ">&#x2B9C;</a>
+    </div>
+        {{ star_grid(list_of_list_of_stars) }}
+        <div class="travel-right ui">
+            <a class="navigation-button"  href="{{ url_for('.view_cluster_page', universe_id=universe_id, x=cluster_coordinate.x+1, y=cluster_coordinate.y) }} ">&#x2B9E;</a>
+        </div>
+    </div>
+    <div class="ui-row">
+        <div class="travel-down">
+            <a class="navigation-button"  href="{{ url_for('.view_cluster_page', universe_id=universe_id, x=cluster_coordinate.x, y=cluster_coordinate.y-1) }} ">&#x2B9F;</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,20 @@
+{# starlines/web/templates/star_grid.html #}
+
+{% macro star_grid(list_of_list_of_stars) %}
+<div class="star-grid">
+{% for row in list_of_list_of_stars %}
+<div class="star-row">
+{% for star in row %}
+    <div class="star">
+        {% if star %}
+        <div><a class="star-orb" href="{{ url_for('.view_star_details', star_id=star.id) }}" title="{{ star['current_mass'] }} / {{ star['maximum_mass'] }}" style="background-color: {{ star['colour'] }}; box-shadow: 0px 0px 10px {{ star['colour'] }}; width: {{ (star['current_mass'] / 4.0) }}vmin; height: {{ (star['current_mass'] / 4.0) }}vmin; transform: translate({{ star.offset[0] }}%, {{ star.offset[1] }}%)"></a></div>
+        <div><small></small></div>
+        {% else %}
+        <p></p>
+        {% endif %}
+    </div>
+    {% endfor %}
+</div>
+{% endfor %}
+    </div>
+{% endmacro %}

@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% block title %}Star{% endblock %}
+
+
+{% block content %}
+
+<h1>Star</h1>
+
+<div class="ui">
+<table>
+    <thead>
+    <tr>
+        <th>Player</th>
+        <th>Ships</th>
+    </tr>
+    </thead>
+    <tbody>
+    {% for player_id, ship_count in star_ship_count.items() %}
+    <tr>
+        <td>{{ player_id }}</td>
+        <td>{{ ship_count }}</td>
+    </tr>
+    {% endfor %}
+    </tbody>
+</table>
+</div>
+
+{% endblock %}

@@ -1,0 +1,10 @@
+<html>
+<head>
+    <title>{% block title %}{% endblock %}</title>
+    <link type="text/css" rel="stylesheet" href="{{ url_for('.static', filename='css/starlines.css') }}">
+</head>
+</html>
+<body>
+{% block content %}
+{% endblock %}
+</body>
