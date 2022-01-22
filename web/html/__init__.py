@@ -11,12 +11,11 @@ from web.db import get_db
 
 bp = Blueprint("web", __name__, static_folder="static", template_folder="templates", url_prefix="/web")
 
-
 @bp.before_request
 def initialise_services():
     g.game_service = GameService(get_db())
     try:
-        g.player_id = uuid.UUID(request.cookies['player_id'])
+        g.player = g.game_service.get_player(uuid.UUID(request.cookies['player_id']))
     except:
         pass
 
@@ -30,7 +29,8 @@ def index():
 
 @bp.route("/universe")
 def view_universe_page():
-    return render_template('universe.html')
+    my_ships = g.game_service.get_player_ships(g.player)
+    return render_template('universe.html', ships=my_ships)
 
 
 @bp.route("/login", methods=['POST'])

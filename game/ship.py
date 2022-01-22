@@ -1,13 +1,15 @@
 from dataclasses import dataclass
+from typing import Union
 from uuid import UUID
 
 from game.gameobject import GameObject
-from game.star import Star
+from game.star import Star, StarID
 
 
 @dataclass
 class Ship(GameObject):
     id: UUID
+    orbiting_star_id: Union[StarID, None]
     model = None
 
 

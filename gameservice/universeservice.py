@@ -1,10 +1,9 @@
 import random
-import uuid
 from typing import Generator, Dict
 
 from game.geometry import Point
-from game.star import Cluster, ClusterID, Star, StarID
-from game.universe import Universe, MASS_PER_NEW_CLUSTER, CLUSTER_SIZE
+from game.star import ClusterID, Star, StarID
+from game.universe import MASS_PER_NEW_CLUSTER, CLUSTER_SIZE
 from gameservice.service import Service
 
 

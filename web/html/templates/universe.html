@@ -1,10 +1,17 @@
 {% extends "base.html" %}
-{% block title %}Star{% endblock %}
+{% block title %}Universe{% endblock %}
 
 
 {% block content %}
 
 <h1>Universe</h1>
+<h2>Welcome {{ g.player['name'] }}</h2>
+<dl>
+    {% for ship in ships %}
+    <dt>{{ ship.model }} &mdash; {{ ship.id }}</dt>
+    <dd>Orbiting {{ ship.orbiting_star_id }}</dd>
+    {% endfor %}
+</dl>
 
 
 {% endblock %}
