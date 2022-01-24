@@ -1,6 +1,7 @@
+import re
 import uuid
 from dataclasses import dataclass
-from typing import Dict, Tuple
+from typing import Dict, Tuple, List
 from uuid import UUID
 from pairing_functions import szudzik
 
@@ -8,9 +9,10 @@ from colour import Color
 
 from game.gameobject import GameObject
 from game.geometry import Point
+from game.objectid import ID
 
 
-class StarID(UUID):
+class StarID(ID):
     @staticmethod
     def generate():
         return StarID(str(uuid.uuid4()))
@@ -32,8 +34,8 @@ class ClusterID(Point):
         return (integer + 1) // -2
 
     @staticmethod
-    def from_id(id: int) -> 'ClusterID':
-        integer_x, integer_y = szudzik.unpair(id)
+    def from_id(cluster_id: int) -> 'ClusterID':
+        integer_x, integer_y = szudzik.unpair(cluster_id)
         return ClusterID(ClusterID.integer_to_natural(integer_x), ClusterID.integer_to_natural(integer_y))
 
     @property
@@ -47,14 +49,19 @@ class Star(GameObject):
     id: StarID
     current_mass: int
     maximum_mass: int
+    orbiting_ships: int
+
+    @property
+    def name(self) -> str:
+        return self.id.name
 
     @property
     def colour(self) -> Color:
-        return Color(hue=float(self.id.bytes[0])/255, saturation=1.0, luminance=0.9)
+        return self.id.colour
 
     @property
     def offset(self) -> Tuple[float, float]:
-        return self.id.bytes[1]/2.55 - 50, self.id.bytes[2]/2.55 - 50
+        return 0 # .2 * (self.id.bytes[1]/2.55 - 50), 0.2 * (self.id.bytes[2]/2.55 - 50)
 
 @dataclass
 class Cluster(GameObject):

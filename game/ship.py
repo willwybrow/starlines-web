@@ -16,3 +16,11 @@ class Ship(GameObject):
 @dataclass
 class Probe(Ship):
     model = "probe"
+
+@dataclass
+class Harvester(Ship):
+    model = "harvester"
+
+@dataclass
+class Stabiliser(Ship):
+    model = "stabiliser"

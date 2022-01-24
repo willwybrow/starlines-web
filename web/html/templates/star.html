@@ -4,22 +4,26 @@
 
 {% block content %}
 
-<h1>Star</h1>
+<h1>Star {{ star_id.name }}</h1>
 
 <div class="ui">
 <table>
     <thead>
     <tr>
         <th>Player</th>
+        <th>Ship Model</th>
         <th>Ships</th>
     </tr>
     </thead>
     <tbody>
-    {% for player_id, ship_count in star_ship_count.items() %}
+    {% for player_id, ship_count_map in star_ship_count.items() %}
+    {% for ship_model, count in ship_count_map.items() %}
     <tr>
         <td>{{ player_id }}</td>
-        <td>{{ ship_count }}</td>
+        <td>{{ ship_model }}</td>
+        <td>{{ count }}</td>
     </tr>
+    {% endfor %}
     {% endfor %}
     </tbody>
 </table>

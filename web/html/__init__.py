@@ -4,7 +4,7 @@ from flask import render_template, g, url_for, request, make_response, Blueprint
 from werkzeug.utils import redirect
 
 from game.geometry import Point
-from game.star import ClusterID
+from game.star import ClusterID, StarID
 from game.universe import CLUSTER_SIZE
 from gameservice.gameservice import GameService
 from web.db import get_db
@@ -55,6 +55,6 @@ def view_cluster_page(x=None, y=None):
 
 @bp.route("/star/<star_id>")
 def view_star_details(star_id):
-    sid = uuid.UUID(star_id)
+    sid = StarID(star_id)
     star_ship_count = g.game_service.get_star_details(sid)
-    return render_template('star.html', star_ship_count=star_ship_count)
+    return render_template('star.html', star_id=sid, star_ship_count=star_ship_count)

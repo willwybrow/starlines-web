@@ -1,7 +1,12 @@
 body {
     // background: #001 url('/static/img/star_field.jpg');
     background: #001 url('https://sombrero.hatstand.club/images/star_field.jpg');
-    color: white;
+    color: AliceBlue;
+    font-family: monospace;
+}
+
+a,a:visited,a:active,a:hover {
+    color: AntiqueWhite;
 }
 
 .ui {
@@ -17,23 +22,23 @@ body {
 }
 
 .star-grid {
+    background-color: rgba(0, 0, 0, 0.5);
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 2.5vmin;
 }
 
 .star-row {
     display: flex;
     justify-content: center;
-    height: 10vmin;
 }
 
 .star {
-    width: 10vmin;
-    height: 10vmin;
+    width: 15vmin;
+    height: 15vmin;
     font-size: 2vmin;
     display: flex;
-    overflow: hidden;
     text-align: center;
     flex-direction: column;
     justify-content: center;
@@ -44,9 +49,11 @@ body {
     background: rgba(200, 128, 128, 0.1);
 }
 
-.star-orb {
+a.star-orb {
     display: inline-block;
     border-radius: 50%;
+    text-decoration: none;
+    color: Black;
 }
 
 .star>* {
@@ -56,7 +63,6 @@ body {
 
 a.navigation-button {
     background: black;
-    color: white;
     display: inline-block;
     width: 5vmin;
     height: 5vmin;
@@ -65,5 +71,5 @@ a.navigation-button {
     line-height: 5vmin;
     font-size: 2vmin;
     text-decoration: none;
-    box-shadow: 1px 1px 1px white;
+    box-shadow: 1px 1px 1px AntiqueWhite;
 }

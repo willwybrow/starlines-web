@@ -9,7 +9,7 @@
 <dl>
     {% for ship in ships %}
     <dt>{{ ship.model }} &mdash; {{ ship.id }}</dt>
-    <dd>Orbiting {{ ship.orbiting_star_id }}</dd>
+    <dd>Orbiting <a href="{{ url_for('.view_star_details', star_id=ship.orbiting_star_id) }}">{{ ship.orbiting_star_id.name }}</a></dd>
     {% endfor %}
 </dl>
 
