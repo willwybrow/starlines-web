@@ -4,6 +4,7 @@ from flask import render_template, g, url_for, request, make_response, Blueprint
 from werkzeug.utils import redirect
 
 from game.geometry import Point
+from game.player import PlayerID
 from game.star import ClusterID, StarID
 from game.universe import CLUSTER_SIZE
 from gameservice.gameservice import GameService
@@ -15,7 +16,7 @@ bp = Blueprint("web", __name__, static_folder="static", template_folder="templat
 def initialise_services():
     g.game_service = GameService(get_db())
     try:
-        g.player = g.game_service.get_player(uuid.UUID(request.cookies['player_id']))
+        g.player = g.game_service.get_player(PlayerID(request.cookies['player_id']))
     except:
         pass
 

@@ -5,6 +5,10 @@
 </head>
 </html>
 <body>
+<nav>
+    <a href="{{ url_for('.view_universe_page') }}">Overview</a>
+    <a href="{{ url_for('.view_cluster_page', x=0, y=0) }}">Stars</a>
+</nav>
 {% block content %}
 {% endblock %}
 </body>
